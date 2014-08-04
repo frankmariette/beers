@@ -1,0 +1,11 @@
+{
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "Beers",
+    "coffee": false,
+    "testFramework": "mocha",
+    "templateFramework": "handlebars",
+    "compassBootstrap": true
+  },
+  "generator-mocha": {}
+}
