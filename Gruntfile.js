@@ -160,7 +160,8 @@ module.exports = function (grunt) {
                         'jquery': '../../<%= config.app %>/bower_components/jquery/dist/jquery',
                         'underscore': '../../<%= config.app %>/bower_components/lodash/dist/lodash',
                         'backbone': '../../<%= config.app %>/bower_components/backbone/backbone',
-                        'handlebars': '../../<%= config.app %>/bower_components/handlebars/handlebars'
+                        'hbs': '../../<%= config.app %>/bower_components/handlebars/handlebars',
+                        'text' : '../../<%= config.app %>/bower_components/requirejs-text/text'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
