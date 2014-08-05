@@ -9,6 +9,9 @@ require.config({
         },
         handlebars: {
             exports: 'Handlebars'
+        },
+        underscore: {
+          exports: "_"
         }
     },
     paths: {
@@ -21,7 +24,7 @@ require.config({
 });
 
 require([
-    'backbone'
-], function (Backbone) {
-    Backbone.history.start();
+    'backbone','router'
+], function (Backbone, Router) {
+    var appRouter = new Router();
 });

@@ -153,13 +153,14 @@ module.exports = function (grunt) {
             dist: {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
-                    baseUrl: '<%= yeoman.app %>/scripts',
+                    baseUrl: '<%= config.app %>/scripts',
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
-                        'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
-                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
+                        'jquery': '../../<%= config.app %>/bower_components/jquery/dist/jquery',
+                        'underscore': '../../<%= config.app %>/bower_components/lodash/dist/lodash',
+                        'backbone': '../../<%= config.app %>/bower_components/backbone/backbone',
+                        'handlebars': '../../<%= config.app %>/bower_components/handlebars/handlebars'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -173,7 +174,7 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: '<%= yeoman.app %>/index.html',
+            html: '<%= config.app %>/index.html',
             options: {
                 dest: '<%= yeoman.dist %>'
             }
