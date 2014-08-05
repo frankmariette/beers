@@ -70,6 +70,9 @@ body {
 .beer {
   width: 250px;
   text-align: justify;
+  .name {
+    text-align: center;
+  }
   img {
     display: block;
     margin-left: auto;
