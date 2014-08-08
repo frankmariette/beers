@@ -1,3 +1,3 @@
-define( function(require){
-
-})
+define( function(){
+  'use strict';
+});
