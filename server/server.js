@@ -18,6 +18,8 @@ app.configure('development', function () {
 
 routes.init(app);
 
+app.get('/beers', routes.getAllBeers);
+
 mongoose.connect("127.0.0.1", "beers", 27017);
 
 http.createServer(app).listen(3000);
