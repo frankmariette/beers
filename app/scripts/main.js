@@ -9,7 +9,7 @@ require.config({
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         handlebars: '../bower_components/handlebars/handlebars',
         text: '../bower_components/requirejs-text/text',
-        hbs: '../../<%= yeoman.app %>/bower_components/require-handlebars-plugin/hbs',
+        hbs: '../bower_components/require-handlebars-plugin/hbs',
         lodash: '../bower_components/lodash/dist/lodash.compat',
         mocha: '../bower_components/mocha/mocha',
         modernizr: '../bower_components/modernizr/modernizr',
