@@ -83,8 +83,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             lrSnippet,
-                            mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'test'),
+                            mountFolder(connect, '.tmp'),
                             mountFolder(connect, yeomanConfig.app)
                         ];
                     }
@@ -111,6 +111,14 @@ module.exports = function (grunt) {
         clean: {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
             server: '.tmp'
+        },
+        express: {
+          dev: {
+            options: {
+              port: 9000,
+              script: 'server/server.js'
+            }
+          }
         },
         jshint: {
             options: {
@@ -153,16 +161,31 @@ module.exports = function (grunt) {
             dist: {
                 // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
                 options: {
-                    baseUrl: '<%= config.app %>/scripts',
+                    baseUrl: '<%= yeoman.app %>/scripts',
                     optimize: 'none',
                     paths: {
-                        'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../<%= config.app %>/bower_components/jquery/dist/jquery',
-                        'underscore': '../../<%= config.app %>/bower_components/lodash/dist/lodash',
-                        'backbone': '../../<%= config.app %>/bower_components/backbone/backbone',
-                        'hbs': '../../<%= config.app %>/bower_components/handlebars/handlebars',
-                        'text' : '../../<%= config.app %>/bower_components/requirejs-text/text'
+                        'templates': '../../<%= yeoman.app %>/scripts/templates',
+                        'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
+                        'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
+                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone',
+                        'Handlebars': '../../<%= yeoman.app %>/bower_components/handlebars/handlebars',
+                        'text' : '../../<%= yeoman.app %>/bower_components/requirejs-text/text',
+                        'hbs': '../../<%= yeoman.app %>/bower_components/require-handlebars-plugin/hbs'
                     },
+                    shim: {
+                      bootstrap: {
+                          deps: ['jquery'],
+                          exports: 'jquery'
+                      },
+                      handlebars: {
+                          exports: 'Handlebars'
+                      },
+                      underscore: {
+                        exports: '_'
+                      }
+                    },
+                    wrapShim: true,
+                    inlineText: true,
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
                     //generateSourceMaps: true,
@@ -175,7 +198,7 @@ module.exports = function (grunt) {
             }
         },
         useminPrepare: {
-            html: '<%= config.app %>/index.html',
+            html: '<%= yeoman.app %>/index.html',
             options: {
                 dest: '<%= yeoman.dist %>'
             }
@@ -276,6 +299,9 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
+
     grunt.registerTask('createDefaultTemplate', function () {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
@@ -287,7 +313,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
-            return grunt.task.run(['build', 'open:server', 'connect:dist:keepalive']);
+            return grunt.task.run(['build', 'express:dev', 'connect:dist:keepalive']);
         }
 
         if (target === 'test') {
@@ -297,7 +323,7 @@ module.exports = function (grunt) {
                 'handlebars',
                 'compass:server',
                 'connect:test',
-                'open:test',
+                'express:test',
                 'watch'
             ]);
         }
@@ -308,7 +334,7 @@ module.exports = function (grunt) {
             'handlebars',
             'compass:server',
             'connect:livereload',
-            'open:server',
+            'express:dev',
             'watch'
         ]);
     });

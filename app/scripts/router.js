@@ -1,15 +1,14 @@
 define( function(require){
+  'use strict';
   var Backbone = require('backbone');
-  var _  = require('underscore');
   var MainView = require('views/MainView');
 
   var router = Backbone.Router.extend({
     routes: {
       '': 'home'
     },
-    initialize: function(options){
+    initialize: function(){
       this.$el = $('div.wrapper');
-      Backbone.history.start();
     },
     home: function(){
       var mainView = new MainView();
@@ -18,4 +17,4 @@ define( function(require){
   });
 
   return router;
-})
+});
