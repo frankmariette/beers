@@ -115,7 +115,8 @@ module.exports = function (grunt) {
         express: {
           dev: {
             options: {
-              script: "server/server.js"
+              port: 9000,
+              script: 'server/server.js'
             }
           }
         },
@@ -312,7 +313,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
-            return grunt.task.run(['build', 'open:server', 'connect:dist:keepalive']);
+            return grunt.task.run(['build', 'express:dev', 'connect:dist:keepalive']);
         }
 
         if (target === 'test') {
@@ -322,7 +323,7 @@ module.exports = function (grunt) {
                 'handlebars',
                 'compass:server',
                 'connect:test',
-                'open:test',
+                'express:test',
                 'watch'
             ]);
         }
@@ -333,7 +334,7 @@ module.exports = function (grunt) {
             'handlebars',
             'compass:server',
             'connect:livereload',
-            'open:server',
+            'express:dev',
             'watch'
         ]);
     });
