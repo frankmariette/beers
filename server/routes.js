@@ -20,8 +20,16 @@
     });
   };
 
+  function home(req,res){
+    return "app/index.html";
+  }
+
   exports.init = function (app) {
     app.get('/beers', getAllBeers);
   };
+
+  exports.init = function (app) {
+    app.get('/', home);
+  }
 
 }(exports));

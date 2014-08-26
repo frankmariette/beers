@@ -112,6 +112,13 @@ module.exports = function (grunt) {
             dist: ['.tmp', '<%= yeoman.dist %>/*'],
             server: '.tmp'
         },
+        express: {
+          dev: {
+            options: {
+              script: "server/server.js"
+            }
+          }
+        },
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
@@ -291,6 +298,7 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-contrib-handlebars');
 
     grunt.registerTask('createDefaultTemplate', function () {
