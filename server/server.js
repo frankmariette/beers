@@ -28,9 +28,8 @@ app.get('/beers', routes.getAllBeers);
 
 app.post('/beers', function(req,res){
   // res.send(res);
-  console.log(req.params);
-
-})
+  console.log(req.body);
+});
 
 mongoose.connect("127.0.0.1", "beers", 27017);
 
