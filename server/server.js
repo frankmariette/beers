@@ -1,24 +1,36 @@
 var express = require('express'),
     http = require('http'),
+    bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
+    errorhandler = require('errorhandler'),
     routes = require('./routes'),
     app = express();
 
-app.configure(function () {
-  app.use(express.logger('dev'));
-  app.use(express.static(__dirname + '../app'));
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-});
+var env = process.env.NODE_ENV || 'development';
 
-app.configure('development', function () {
-  app.use(express.errorHandler());
-});
+app.use(express.static(__dirname + '../app'));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+
+
+if (env === 'development'){
+  app.use(errorhandler());
+}
+
 
 routes.init(app);
 
+app.get('/', function(req,res){
+  res.send('../app/index.html');
+});
+
 app.get('/beers', routes.getAllBeers);
+
+app.post('/beers', function(req,res){
+  // res.send(res);
+  console.log(req.params);
+
+})
 
 mongoose.connect("127.0.0.1", "beers", 27017);
 

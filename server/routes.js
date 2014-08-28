@@ -13,22 +13,20 @@
 
   var Beer = mongoose.model('Beer', BeerSchema);
 
-   exports.getAllBeers = function(req, res) {
+  exports.getAllBeers = function(req, res) {
     Beer.find(function (err, beers) {
       if (err) return console.error(err);
-      res.send(beers);
+      console.log(beers);
     });
   };
 
-  exports.addBeer = function(req, res){
+  function addBeer(req, res){
     if (err) {return err};
     return res;
   }
 
   exports.init = function (app) {
-    console.log(app.port);
+    console.log("some stuff happened");
   };
-
-
 
 }(exports));
